@@ -1,0 +1,43 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model ProjectPrn211.Models.User
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="/css/login.css" />
+</head>
+<body>
+    <div class="parent clearfix">
+        <div class="bg-illustration">
+            <a href="/home/index"><img src="/images/logo-login.png" alt="logo"></a>
+            <div class="burger-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <div class="login">
+            <div class="container">
+                <h1 style="color: #fdd6bd;">Login To Your Account</h1>
+                <div class="login-form">
+                    <form asp-controller="Login" asp-action="Login" method="post">
+                        <input asp-for="Account" placeholder="Account" />
+                        <input asp-for="Password" placeholder="Password" />
+                        <div class="remember-form">
+                            <input type="checkbox">
+                            <span>Remember me</span>
+                        </div>
+                        <div class="forget-pass">
+                            <a href="/login/singin">You don't have an account? </a>
+                        </div>
+                        <input type="submit" value="LOG-IN" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

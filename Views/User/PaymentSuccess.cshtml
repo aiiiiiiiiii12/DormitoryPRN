@@ -1,0 +1,8 @@
+﻿@using ProjectPrn211.Models;
+
+@{
+    var user = ViewData["User"] as User;
+}
+<h1>Tài khoản được nạp thành công</h1>
+<h1>Số dư hiện tại là: @user.Money</h1>
+<a href="@Url.Action("Index", "Booking", user)">Trở về trang chủ đặt phòng</a>

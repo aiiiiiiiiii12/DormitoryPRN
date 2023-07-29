@@ -1,0 +1,49 @@
+﻿@using ProjectPrn211.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model ProjectPrn211.Models.Room
+
+@{
+    Layout = "~/Views/Shared/_DashLayout.cshtml";
+    var buildings = ViewData["bookings"] as List<Building>;
+    var roomtypes = ViewData["roomtypes"] as List<Roomtype>;
+}
+<form method="post" asp-action="AddRoom" asp-controller="Room" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="Roomname">Room Name:</label>
+        <input asp-for="Roomname" class="form-control" required />
+        <span asp-validation-for="Roomname" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="BuildingId">Building ID:</label>
+        <select asp-for="BuildingId" class="form-control" required>
+            <option value="">-- Select Building --</option>
+            @foreach (var building in buildings)
+            {
+                <option value="@building.BuildingId">@building.Buildingname</option>
+            }
+        </select>
+        <span asp-validation-for="BuildingId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="RtypeId">Room Type:</label>
+        <select asp-for="RtypeId" class="form-control" required>
+            <option value="">-- Select Room Type --</option>
+            @foreach (var roomtype in roomtypes)
+            {
+                <option value="@roomtype.RtypeId">@roomtype.Number</option>
+            }
+        </select>
+        <span asp-validation-for="RtypeId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="RoomImg">Room Image:</label>
+        <input type="file" asp-for="RoomImg" class="form-control" />
+        <span asp-validation-for="RoomImg" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="hidden" asp-for="Member" value="0" /> <!-- Giá trị mặc định của Member là 0 -->
+    </div>
+    <button type="submit" class="btn btn-primary">Create Room</button>
+</form>
+
+

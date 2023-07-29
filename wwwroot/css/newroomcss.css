@@ -1,0 +1,77 @@
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    height: 400px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.form-container input[type="text"],
+.form-container select,
+.form-container input[type="file"] {
+    margin: 10px 0;
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    font-size: 16px;
+}
+
+.form-container input[type="submit"] {
+    margin-top: 50px;
+    padding: 8px 20px;
+    background-color: #22BAA0;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.form-container input[type="submit"]:hover {
+    background-color: #1B8E7F;
+}
+
+body {
+    background-color: #F2F2F2;
+}
+
+/* Center the form vertically and horizontally */
+.form-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Hide the file input */
+.form-container input[type="file"] {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+/* Style the label for the file input */
+.form-container input[type="file"] + label {
+    background-color: #22BAA0;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Show the filename when a file is selected */
+.form-container input[type="file"]:valid + label::before {
+    content: "File selected: " attr(data-file);
+}
+.button-to-form:hover{
+    background-color: #287467;
+    cursor: pointer;
+
+}

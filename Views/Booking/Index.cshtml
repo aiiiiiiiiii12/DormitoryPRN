@@ -1,0 +1,75 @@
+﻿@using ProjectPrn211.Models
+
+@{
+    Layout = "~/pages/shared/_layout.cshtml";
+    var user = ViewData["user"] as User;
+    var rooms = ViewData["Rooms"] as List<Room>;
+    var bookings = ViewData["bookings"] as List<Booking>;
+
+}
+<style>
+    .room {
+        padding: 0px;
+        background-color: #d7e4ef;
+        border: 1px solid burlywood;
+        text-align: center;
+        border-radius: 20px;
+        height: 520px;
+        font-weight: bold;
+        overflow: hidden;
+        transition: border-color 0.3s ease;
+        margin-bottom: 20px; /* Thêm khoảng cách dưới mỗi div */
+    }
+
+        .room:hover {
+            border-color: #ff0000;
+        }
+
+        .room img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 10px;
+        }
+</style>
+
+@if (user != null)
+{
+    <div class="container" style="padding-top: 60px;">
+       @* <h1>@user.Account</h1>
+        <h1>@user.Inroom</h1>*@
+        <div class="row">
+            @foreach (var room in rooms)
+            {
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="room">
+                        <img src="/imgroom/@room.RoomImg" class="img-fluid img-thumbnail" />
+                        <h2>@room.Roomid</h2>
+                        <h2>@room.Roomname</h2>
+                        <h2>@room.RtypeId</h2>
+                        <h2>@room.Rtype.Price</h2>
+                        @if (user.Inroom == true)
+                        {
+                            <a class="btn btn-primary disabled">Đã trong phòng</a>
+                        }
+                        else if (bookings.Count > 0)
+                        {
+                            <a class="btn btn-primary disabled">Đã đặt phòng</a>
+                        }
+                        else
+                        {
+                            @if (room.Member < room.Rtype.Number)
+                            {
+                                <a class="btn btn-primary" href="/booking/bookroom?Account=@user.Account&RoomId=@room.Roomid">Đặt phòng</a>
+                            }
+                            else
+                            {
+                                <a class="btn btn-danger disabled">Full Room</a>
+                            }
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}

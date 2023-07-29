@@ -1,0 +1,151 @@
+﻿@using ProjectPrn211.Models
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    Layout = "~/pages/shared/_layout.cshtml";
+
+    var user = ViewData["User"] as User;
+}
+
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<form method="post" asp-action="updateprofile" asp-controller="user">
+    <input type="hidden" asp-for="@user.Account" />
+<div class="container emp-profile" style="padding:100px">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-img">
+                    <img src="https://www.w3schools.com/w3css/img_avatar3.png" alt="" style="width:100%;"/>
+                   
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="profile-head">
+                    <h5>
+                        @user.Name
+                    </h5>
+                    <h6>
+                     Information of user
+                    </h6>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Booking</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2">
+                
+                
+                <input type="submit" class="btn btn-danger" value="Update Profile"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-work">
+                    <a href="/user/payment?Account=@user.Account" class="btn btn-primary" style="padding: 10px;margin: 30px;">Add Money</a>
+
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>User Id</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>@user.Account</p>
+                                
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Name</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input asp-for="@user.Name"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Email</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input asp-for="@user.Email" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Address</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input asp-for="@user.Address" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Dob</label>
+                            </div>
+                            <div class="col-md-6">
+                             <input asp-for="@user.Dateofbirth" />
+                      
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Money</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>@user.Money</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>InRoomStatus</label>
+                            </div>
+                            <div class="col-md-6">
+                                @if (@user.Inroom == false)
+                                {
+                                    <p>No</p>
+                                }
+                                else
+                                {
+                                    <p>Inroom</p>
+                                }
+                            </div>
+                        </div>
+                        @foreach(var book in user.Bookings)
+                        {
+
+                            @if (book.Confirmroom == true)
+                            {
+
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                <label>Room</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>@book.Room.Roomname</p>
+                            </div>
+                            </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>
